@@ -1,2 +1,2 @@
-# WEB TECHNOLOGIES
+# Web Technologies lab
 
