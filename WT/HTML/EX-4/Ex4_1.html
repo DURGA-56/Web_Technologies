@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyPort Guide - Smart Airport Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+           background: linear-gradient(135deg, #eebbd5 0%, #2f284e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 2px solid #e3f2fd;
+            border-radius: 15px;
+            background: #fafafa;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Poppins', 'Arial', sans-serif;
+        }
+        
+        /* Different colors for each section heading */
+        .passenger-info .section-title {
+            color: #e74c3c;
+            border-bottom-color: #e74c3c;
+            text-shadow: 1px 1px 2px rgba(231, 76, 60, 0.3);
+        }
+        
+        .baggage-info .section-title {
+            color: #f39c12;
+            border-bottom-color: #f39c12;
+            text-shadow: 1px 1px 2px rgba(243, 156, 18, 0.3);
+        }
+        
+        .flight-info .section-title {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            text-shadow: 1px 1px 2px rgba(52, 152, 219, 0.3);
+        }
+        
+        .connecting-flight .section-title {
+            color: #9b59b6;
+            border-bottom-color: #9b59b6;
+            text-shadow: 1px 1px 2px rgba(155, 89, 182, 0.3);
+        }
+        
+        .travel-preferences .section-title {
+            color: #27ae60;
+            border-bottom-color: #27ae60;
+            text-shadow: 1px 1px 2px rgba(39, 174, 96, 0.3);
+        }
+        
+        .checkin-preferences .section-title {
+            color: #e67e22;
+            border-bottom-color: #e67e22;
+            text-shadow: 1px 1px 2px rgba(230, 126, 34, 0.3);
+        }
+        
+        .documents .section-title {
+            color: #34495e;
+            border-bottom-color: #34495e;
+            text-shadow: 1px 1px 2px rgba(52, 73, 94, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+        
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #ecf0f1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox-item:hover,
+        .radio-item:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .checkbox-item input,
+        .radio-item input {
+            width: auto;
+            margin: 0;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+        
+        .reset-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(231, 76, 60, 0.3);
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✈️ SkyPort Guide</h1>
+            <p>Smart Airport Services & Information System</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="skyportForm" novalidate>
+                <!-- Passenger Information Section -->
+                <div class="form-section passenger-info">
+                    <h2 class="section-title">🧳 Passenger Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                            <div class="error" id="fullNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error" id="emailError"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                            <div class="error" id="phoneError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passportNumber">Passport/ID Number *</label>
+                            <input type="text" id="passportNumber" name="passportNumber" required>
+                            <div class="error" id="passportNumberError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flight Information Section -->
+                <div class="form-section flight-info">
+                    <h2 class="section-title">✈️ Flight Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="flightNumber">Flight Number *</label>
+                            <input type="text" id="flightNumber" name="flightNumber" placeholder="e.g., AI123" required>
+                            <div class="error" id="flightNumberError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="airline">Airline *</label>
+                            <select id="airline" name="airline" required>
+                                <option value="">Select Airline</option>
+                                <option value="air-india">Air India</option>
+                                <option value="indigo">IndiGo</option>
+                                <option value="spicejet">SpiceJet</option>
+                                <option value="vistara">Vistara</option>
+                                <option value="emirates">Emirates</option>
+                                <option value="qatar">Qatar Airways</option>
+                                <option value="singapore">Singapore Airlines</option>
+                            </select>
+                            <div class="error" id="airlineError"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departureDate">Departure Date *</label>
+                            <input type="date" id="departureDate" name="departureDate" required>
+                            <div class="error" id="departureDateError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="departureTime">Departure Time *</label>
+                            <input type="time" id="departureTime" name="departureTime" required>
+                            <div class="error" id="departureTimeError"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination *</label>
+                        <input type="text" id="destination" name="destination" placeholder="e.g., Mumbai, Delhi, Dubai" required>
+                        <div class="error" id="destinationError"></div>
+                    </div>
+                </div>
+
+                <!-- Travel Class & Preferences -->
+                <div class="form-section travel-preferences">
+                    <h2 class="section-title">🎫 Travel Preferences</h2>
+                    <div class="form-group">
+                        <label>Travel Class *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="economy" name="travelClass" value="economy" required>
+                                <label for="economy">Economy</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="business" name="travelClass" value="business">
+                                <label for="business">Business</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="first" name="travelClass" value="first">
+                                <label for="first">First Class</label>
+                            </div>
+                        </div>
+                        <div class="error" id="travelClassError"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="seatPreference">Seat Preference</label>
+                            <select id="seatPreference" name="seatPreference">
+                                <option value="">No Preference</option>
+                                <option value="window">Window</option>
+                                <option value="aisle">Aisle</option>
+                                <option value="middle">Middle</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mealPreference">Meal Preference</label>
+                            <select id="mealPreference" name="mealPreference">
+                                <option value="">Standard Meal</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="halal">Halal</option>
+                                <option value="kosher">Kosher</option>
+                                <option value="diabetic">Diabetic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baggage & Weight Calculator -->
+                <div class="form-section baggage-info">
+                    <h2 class="section-title">🧳 Baggage Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="luggageCount">Number of Bags *</label>
+                            <input type="number" id="luggageCount" name="luggageCount" min="0" max="10" value="1" required>
+                            <div class="error" id="luggageCountError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalWeight">Total Weight (kg) *</label>
+                            <input type="number" id="totalWeight" name="totalWeight" min="0" max="100" step="0.1" required>
+                            <div class="error" id="totalWeightError"></div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="weightCalculator" style="background: #e8f5e8; padding: 15px; border-radius: 8px; display: none;">
+                        <h4 style="color: #27ae60;">💰 Baggage Fee Calculator</h4>
+                        <div id="baggageFeeResult"></div>
+                    </div>
+                </div>
+
+                <!-- Connecting Flight Information -->
+                <div class="form-section connecting-flight">
+                    <h2 class="section-title">🔄 Connecting Flight Details</h2>
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hasConnectingFlight" name="hasConnectingFlight">
+                            <label for="hasConnectingFlight">I have a connecting flight</label>
+                        </div>
+                    </div>
+                    <div id="connectingFlightDetails" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="layoverAirport">Layover Airport</label>
+                                <input type="text" id="layoverAirport" name="layoverAirport" placeholder="e.g., Dubai International">
+                                <div class="error" id="layoverAirportError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="layoverDuration">Layover Duration (hours)</label>
+                                <input type="number" id="layoverDuration" name="layoverDuration" min="0.5" max="24" step="0.5">
+                                <div class="error" id="layoverDurationError"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="finalDestination">Final Destination</label>
+                            <input type="text" id="finalDestination" name="finalDestination" placeholder="Final destination city">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Check-in & Boarding Preferences -->
+                <div class="form-section checkin-preferences">
+                    <h2 class="section-title">✅ Check-in Preferences</h2>
+                    <div class="form-group">
+                        <label>Check-in Method *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="onlineCheckin" name="checkinMethod" value="online" required>
+                                <label for="onlineCheckin">Online Check-in</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="airportCheckin" name="checkinMethod" value="airport">
+                                <label for="airportCheckin">Airport Check-in</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="mobileCheckin" name="checkinMethod" value="mobile">
+                                <label for="mobileCheckin">Mobile Check-in</label>
+                            </div>
+                        </div>
+                        <div class="error" id="checkinMethodError"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="boardingPassMethod">Boarding Pass Delivery *</label>
+                            <select id="boardingPassMethod" name="boardingPassMethod" required>
+                                <option value="">Select Method</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="sms">SMS</option>
+                                <option value="email">Email</option>
+                                <option value="print">Print at Airport</option>
+                            </select>
+                            <div class="error" id="boardingPassMethodError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobileNumber">Mobile for Boarding Pass *</label>
+                            <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Mobile number for boarding pass" required>
+                            <div class="error" id="mobileNumberError"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Travel Documents & Visa -->
+                <div class="form-section documents">
+                    <h2 class="section-title">📄 Travel Documents</h2>
+                    <div class="form-group">
+                        <label>Document Requirements Confirmation *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="validPassport" name="documents" value="passport" required>
+                                <label for="validPassport">Valid Passport (6+ months validity)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="visaRequired" name="documents" value="visa">
+                                <label for="visaRequired">Visa (if required)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="covidDocuments" name="documents" value="covid">
+                                <label for="covidDocuments">COVID-19 Documents (if required)</label>
+                            </div>
+                        </div>
+                        <div class="error" id="documentsError"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passportExpiry">Passport Expiry Date *</label>
+                            <input type="date" id="passportExpiry" name="passportExpiry" required>
+                            <div class="error" id="passportExpiryError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="visaNumber">Visa Number (if applicable)</label>
+                            <input type="text" id="visaNumber" name="visaNumber" placeholder="Enter visa number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="form-section">
+                    <button type="button" class="reset-btn" onclick="resetForm()">Reset Form</button>
+                    <button type="submit" class="submit-btn">Submit Registration</button>
+                    <div class="success-message" id="successMessage">
+                        ✅ Your SkyPort Guide registration has been submitted successfully!
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Form validation functions
+        function validateFullName() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const error = document.getElementById('fullNameError');
+            
+            if (fullName.length < 2) {
+                error.textContent = 'Full name must be at least 2 characters long';
+                error.style.display = 'block';
+                return false;
+            }
+            if (!/^[a-zA-Z\s]+$/.test(fullName)) {
+                error.textContent = 'Full name should only contain letters and spaces';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateLuggageCount() {
+            const count = parseInt(document.getElementById('luggageCount').value);
+            const error = document.getElementById('luggageCountError');
+            
+            if (count < 0 || count > 10) {
+                error.textContent = 'Number of bags must be between 0 and 10';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            calculateBaggageFee();
+            return true;
+        }
+
+        function validateTotalWeight() {
+            const weight = parseFloat(document.getElementById('totalWeight').value);
+            const error = document.getElementById('totalWeightError');
+            
+            if (weight < 0 || weight > 100) {
+                error.textContent = 'Weight must be between 0 and 100 kg';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            calculateBaggageFee();
+            return true;
+        }
+
+        function validateConnectingFlight() {
+            const hasConnecting = document.getElementById('hasConnectingFlight').checked;
+            if (hasConnecting) {
+                const airport = document.getElementById('layoverAirport').value.trim();
+                const duration = parseFloat(document.getElementById('layoverDuration').value);
+                const airportError = document.getElementById('layoverAirportError');
+                const durationError = document.getElementById('layoverDurationError');
+                
+                let isValid = true;
+                
+                if (airport.length < 3) {
+                    airportError.textContent = 'Please enter a valid layover airport';
+                    airportError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    airportError.style.display = 'none';
+                }
+                
+                if (duration < 0.5 || duration > 24) {
+                    durationError.textContent = 'Layover duration must be between 0.5 and 24 hours';
+                    durationError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    durationError.style.display = 'none';
+                }
+                
+                return isValid;
+            }
+            return true;
+        }
+
+        function validateCheckinMethod() {
+            const checkin = document.querySelector('input[name="checkinMethod"]:checked');
+            const error = document.getElementById('checkinMethodError');
+            
+            if (!checkin) {
+                error.textContent = 'Please select a check-in method';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateBoardingPass() {
+            const method = document.getElementById('boardingPassMethod').value;
+            const error = document.getElementById('boardingPassMethodError');
+            
+            if (!method) {
+                error.textContent = 'Please select boarding pass delivery method';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateMobileNumber() {
+            const mobile = document.getElementById('mobileNumber').value.trim();
+            const error = document.getElementById('mobileNumberError');
+            const mobileRegex = /^[\+]?[1-9][\d]{9,14}$/;
+            
+            if (!mobileRegex.test(mobile)) {
+                error.textContent = 'Please enter a valid mobile number';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateDocuments() {
+            const passport = document.getElementById('validPassport').checked;
+            const error = document.getElementById('documentsError');
+            
+            if (!passport) {
+                error.textContent = 'Valid passport confirmation is required';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validatePassportExpiry() {
+            const expiry = new Date(document.getElementById('passportExpiry').value);
+            const error = document.getElementById('passportExpiryError');
+            const today = new Date();
+            const sixMonthsFromNow = new Date();
+            sixMonthsFromNow.setMonth(today.getMonth() + 6);
+            
+            if (!document.getElementById('passportExpiry').value) {
+                error.textContent = 'Passport expiry date is required';
+                error.style.display = 'block';
+                return false;
+            }
+            
+            if (expiry <= sixMonthsFromNow) {
+                error.textContent = 'Passport must be valid for at least 6 months from today';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        // Baggage fee calculator
+        function calculateBaggageFee() {
+            const weight = parseFloat(document.getElementById('totalWeight').value) || 0;
+            const count = parseInt(document.getElementById('luggageCount').value) || 0;
+            const calculator = document.getElementById('weightCalculator');
+            const result = document.getElementById('baggageFeeResult');
+            
+            if (weight > 0 && count > 0) {
+                calculator.style.display = 'block';
+                
+                let fee = 0;
+                let message = '';
+                
+                // Basic calculation (simplified)
+                const freeAllowance = 20; // kg
+                const excessRate = 300; // per kg
+                
+                if (weight > freeAllowance) {
+                    fee = (weight - freeAllowance) * excessRate;
+                    message = `Excess weight: ${(weight - freeAllowance).toFixed(1)} kg<br>`;
+                    message += `Excess baggage fee: ₹${fee.toFixed(0)}`;
+                } else {
+                    message = `✅ Within free allowance (${freeAllowance} kg)<br>No excess fee`;
+                }
+                
+                result.innerHTML = message;
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email').value.trim();
+            const error = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                error.textContent = 'Please enter a valid email address';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validatePhone() {
+            const phone = document.getElementById('phone').value.trim();
+            const error = document.getElementById('phoneError');
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            
+            if (!phoneRegex.test(phone) || phone.length < 10) {
+                error.textContent = 'Please enter a valid phone number (min 10 digits)';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validatePassportNumber() {
+            const passport = document.getElementById('passportNumber').value.trim();
+            const error = document.getElementById('passportNumberError');
+            
+            if (passport.length < 6 || passport.length > 12) {
+                error.textContent = 'Passport/ID number must be 6-12 characters long';
+                error.style.display = 'block';
+                return false;
+            }
+            if (!/^[A-Z0-9]+$/i.test(passport)) {
+                error.textContent = 'Passport/ID should only contain letters and numbers';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateFlightNumber() {
+            const flightNumber = document.getElementById('flightNumber').value.trim();
+            const error = document.getElementById('flightNumberError');
+            const flightRegex = /^[A-Z]{2,3}[0-9]{1,4}$/i;
+            
+            if (!flightRegex.test(flightNumber)) {
+                error.textContent = 'Please enter a valid flight number (e.g., AI123, UK456)';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateAirline() {
+            const airline = document.getElementById('airline').value;
+            const error = document.getElementById('airlineError');
+            
+            if (!airline) {
+                error.textContent = 'Please select an airline';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateDepartureDate() {
+            const departureDate = document.getElementById('departureDate').value;
+            const error = document.getElementById('departureDateError');
+            const today = new Date().toISOString().split('T')[0];
+            
+            if (!departureDate) {
+                error.textContent = 'Please select departure date';
+                error.style.display = 'block';
+                return false;
+            }
+            if (departureDate < today) {
+                error.textContent = 'Departure date cannot be in the past';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateDepartureTime() {
+            const departureTime = document.getElementById('departureTime').value;
+            const error = document.getElementById('departureTimeError');
+            
+            if (!departureTime) {
+                error.textContent = 'Please select departure time';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateDestination() {
+            const destination = document.getElementById('destination').value.trim();
+            const error = document.getElementById('destinationError');
+            
+            if (destination.length < 2) {
+                error.textContent = 'Please enter a valid destination';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        function validateTravelClass() {
+            const travelClass = document.querySelector('input[name="travelClass"]:checked');
+            const error = document.getElementById('travelClassError');
+            
+            if (!travelClass) {
+                error.textContent = 'Please select a travel class';
+                error.style.display = 'block';
+                return false;
+            }
+            error.style.display = 'none';
+            return true;
+        }
+
+        // Real-time validation and event listeners
+        document.getElementById('fullName').addEventListener('blur', validateFullName);
+        document.getElementById('email').addEventListener('blur', validateEmail);
+        document.getElementById('phone').addEventListener('blur', validatePhone);
+        document.getElementById('passportNumber').addEventListener('blur', validatePassportNumber);
+        document.getElementById('flightNumber').addEventListener('blur', validateFlightNumber);
+        document.getElementById('airline').addEventListener('change', validateAirline);
+        document.getElementById('departureDate').addEventListener('change', validateDepartureDate);
+        document.getElementById('departureTime').addEventListener('change', validateDepartureTime);
+        document.getElementById('destination').addEventListener('blur', validateDestination);
+        
+        // Feature event listeners
+        document.getElementById('luggageCount').addEventListener('input', validateLuggageCount);
+        document.getElementById('totalWeight').addEventListener('input', validateTotalWeight);
+        document.getElementById('mobileNumber').addEventListener('blur', validateMobileNumber);
+        document.getElementById('passportExpiry').addEventListener('change', validatePassportExpiry);
+        
+        // Toggle connecting flight details
+        document.getElementById('hasConnectingFlight').addEventListener('change', function() {
+            const details = document.getElementById('connectingFlightDetails');
+            details.style.display = this.checked ? 'block' : 'none';
+            
+            if (!this.checked) {
+                document.getElementById('layoverAirport').value = '';
+                document.getElementById('layoverDuration').value = '';
+                document.getElementById('finalDestination').value = '';
+            }
+        });
+
+        // Form submission
+        document.getElementById('skyportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            const validations = [
+                validateFullName(),
+                validateEmail(),
+                validatePhone(),
+                validatePassportNumber(),
+                validateFlightNumber(),
+                validateAirline(),
+                validateDepartureDate(),
+                validateDepartureTime(),
+                validateDestination(),
+                validateTravelClass(),
+                validateLuggageCount(),
+                validateTotalWeight(),
+                validateConnectingFlight(),
+                validateCheckinMethod(),
+                validateBoardingPass(),
+                validateMobileNumber(),
+                validateDocuments(),
+                validatePassportExpiry()
+            ];
+            
+            const isValid = validations.every(v => v === true);
+            
+            if (isValid) {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                
+                // Optional: Log form data
+                const formData = new FormData(this);
+                console.log('Form submitted with data:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(key, value);
+                }
+                
+                // You can add AJAX call here to submit to server
+                setTimeout(() => {
+                    alert('Registration successful! Welcome to SkyPort Guide.');
+                }, 1000);
+            } else {
+                alert('Please correct the errors in the form before submitting.');
+            }
+        });
+
+        // Reset form function
+        function resetForm() {
+            if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
+                document.getElementById('skyportForm').reset();
+                
+                // Hide all error messages
+                const errors = document.querySelectorAll('.error');
+                errors.forEach(error => error.style.display = 'none');
+                
+                // Hide success message
+                document.getElementById('successMessage').style.display = 'none';
+                
+                // Hide connecting flight details
+                document.getElementById('connectingFlightDetails').style.display = 'none';
+                
+                // Hide weight calculator
+                document.getElementById('weightCalculator').style.display = 'none';
+            }
+        }
+
+        // Set minimum dates
+        document.getElementById('departureDate').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
