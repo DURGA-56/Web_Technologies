@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SkyPort Guide</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00bfff, 0 0 20px #0099cc; }
+      to { text-shadow: 0 0 25px #66ccff, 0 0 35px #00ccff; }
+    }
+    .btn {
+      background: rgba(0, 128, 255, 0.8);
+      border: none;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 1.3em;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9em;
+      color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛫 Welcome to SkyPort Guide 🛬</h1>
+  <p>Your Smart Airport Companion — Simplify Your Journey</p>
+  <a href="http://localhost:8080/LAB4026/SProg1" class="btn">Enter SkyPort Portal ✈️</a>
+  <footer>&copy; 2025 SkyPort Guide | Designed for Smarter Travel</footer>
+</body>
+</html>
