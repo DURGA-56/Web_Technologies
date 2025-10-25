@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SkyPort Guide - Login</title>
+<style>
+    body {
+        background: url("https://e1.pxfuel.com/desktop-wallpaper/261/759/desktop-wallpaper-kempegowda-international-airport-hok-bangalore-airport.jpg") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px 50px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    input[type="text"] {
+        padding: 8px;
+        width: 70%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 10px 0;
+    }
+    input[type="submit"] {
+        background-color: #0078D7;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    input[type="submit"]:hover {
+        background-color: #005fa3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome to SkyPort Guide</h2>
+    <p>Enter your name to explore airport services</p>
+    <form action="http://localhost:8080/LAB4026/SProg11">
+        Passenger Name: <input type="text" name="userName" required><br>
+        <input type="submit" value="Enter Guide">
+    </form>
+</div>
+</body>
+</html>

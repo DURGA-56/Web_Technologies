@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SkyPort Guide</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170') center/cover no-repeat fixed; /* your airport background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      padding: 40px 50px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    h2 {
+      color: #0D47A1;
+      margin-bottom: 25px;
+    }
+    p {
+      color: #444;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      outline: none;
+    }
+    input[type="submit"] {
+      background: #1E88E5;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    input[type="submit"]:hover {
+      background: #3b689b;
+      transform: scale(1.05);
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: #1E88E5;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">✈️ Smart Airport Guide</div>
+    <h2>Welcome to SkyPort Guide</h2>
+    <p>Save your preferred airport code or passenger name for a personalized experience.</p>
+
+    <form name="skyportForm" method="POST" action="http://localhost:8080/LAB4026/SProg5">
+      <input type="text" name="userin" placeholder="Enter your airport name/code" required /><br/>
+      <input type="submit" value="Save Preference" />
+    </form>
+  </div>
+</body>
+</html>
