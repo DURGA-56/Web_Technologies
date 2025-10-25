@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Map Example</title>
+</head>
+<body>
+    <h1>Image Mapping</h1>
+    <p>Click on different segments of the plane to view the respective descriptions!</p>
+
+    <img src="plane.jpg" usemap="#Aeroplane" alt="Planepicture" />
+
+    <map name="Aeroplane">
+        <area shape="circle" coords="325,247,30" title="Engine" href="https://www.slashgear.com/1820687/airplane-engine-placement-tail-vs-wing-location-explained/">
+        
+        <area shape="rect" coords="507,137,591,147" title="Windshield" href="https://stock.adobe.com/search?k=airplane+windshield">
+        
+        <area shape="poly" coords="40,186,423,217,47,184,60,185,74,186,413,218,399,215,376,213,357,209,315,201,286,201,267,202,214,198,167,192,131,190,95,187,177,196,187,193,206,198,198,198,241,200,232,199,257,198,331,206,344,208,149,189" title="Wing" href="https://simpleflying.com/how-aircraft-wings-are-made/">
+        
+        <area shape="poly" coords="436,212,460,206,498,189,531,165,583,165,603,198,567,234,510,246,472,246,448,226,476,164,498,122,535,114,581,122,552,198" title="Nose Section" href="https://www.iai.co.il/commercial/aviation/aircraft-division">
+    </map>
+</body>
+</html>
